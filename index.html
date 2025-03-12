@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大手町ビル周辺のショップ＆飲食店ガイド</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #1a237e;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .search-box {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .restaurant-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .restaurant-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .restaurant-info {
+            padding: 1rem;
+        }
+        .restaurant-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .restaurant-category {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        .filter-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        select, input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>大手町ビル周辺飲食店ガイド</h1>
+    </header>
+    
+    <div class="container">
+        <div class="search-box">
+            <div class="filter-section">
+                <input type="text" id="search" placeholder="キーワード検索">
+                <select id="category">
+                    <option value="">ジャンルを選択</option>
+                    <option value="japanese">和食</option>
+                    <option value="chinese">中華</option>
+                    <option value="italian">イタリアン</option>
+                    <option value="cafe">カフェ</option>
+                    <option value="convenience">コンビニ</option>
+                </select>
+                <select id="price">
+                    <option value="">価格帯を選択</option>
+                    <option value="low">〜1,000円</option>
+                    <option value="medium">1,000円〜3,000円</option>
+                    <option value="high">3,000円〜</option>
+                </select>
+                <button id="search-button">検索</button>
+            </div>
+        </div>
+        
+        <div class="restaurant-grid" id="restaurant-list">
+            <!-- レストランカードのテンプレート -->
+            <div class="restaurant-card">
+                <img src="/api/placeholder/300/200" alt="レストラン画像" class="restaurant-image">
+                <div class="restaurant-info">
+                    <div class="restaurant-name">鮨 大手町</div>
+                    <div class="restaurant-category">和食 • ¥¥¥</div>
+                    <div>営業時間: 11:30〜14:00, 17:30〜22:00</div>
+                    <div>電話: 03-XXXX-XXXX</div>
+                </div>
+            </div>
+            
+            <div class="restaurant-card">
+                <img src="/api/placeholder/300/200" alt="レストラン画像" class="restaurant-image">
+                <div class="restaurant-info">
+                    <div class="restaurant-name">大手町イタリアン</div>
+                    <div class="restaurant-category">イタリアン • ¥¥</div>
+                    <div>営業時間: 11:00〜15:00, 17:00〜22:00</div>
+                    <div>電話: 03-XXXX-XXXX</div>
+                </div>
+            </div>
+            
+            <div class="restaurant-card">
+                <img src="/api/placeholder/300/200" alt="レストラン画像" class="restaurant-image">
+                <div class="restaurant-info">
+                    <div class="restaurant-name">大手町コーヒー</div>
+                    <div class="restaurant-category">カフェ • ¥</div>
+                    <div>営業時間: 7:00〜20:00</div>
+                    <div>電話: 03-XXXX-XXXX</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // サンプルデータ（実際の開発ではAPIやJSONファイルから取得）
+        const restaurants = [
+            {
+                id: 1,
+                name: "ファミリーマート大手町ビル店",
+                category: "convenience",
+                priceRange: "low",
+                image: "/api/placeholder/300/200",
+                hours: "8:00〜22:00, 17:30〜22:00",
+                phone: "03-XXXX-XXXX"
+            },
+            {
+                id: 2,
+                name: "大手町イタリアン",
+                category: "italian",
+                priceRange: "medium",
+                image: "/api/placeholder/300/200",
+                hours: "11:00〜15:00, 17:00〜22:00",
+                phone: "03-XXXX-XXXX"
+            },
+            {
+                id: 3,
+                name: "大手町コーヒー",
+                category: "cafe",
+                priceRange: "low",
+                image: "/api/placeholder/300/200",
+                hours: "7:00〜20:00",
+                phone: "03-XXXX-XXXX"
+            }
+            // 実際には複数の店舗データを追加
+        ];
+
+        // 検索ボタンのイベントリスナー
+        document.getElementById('search-button').addEventListener('click', function() {
+            filterRestaurants();
+        });
+
+        // レストランをフィルタリングして表示する関数
+        function filterRestaurants() {
+            const searchKeyword = document.getElementById('search').value.toLowerCase();
+            const selectedCategory = document.getElementById('category').value;
+            const selectedPrice = document.getElementById('price').value;
+            
+            const filteredRestaurants = restaurants.filter(restaurant => {
+                // キーワード検索
+                const matchesKeyword = restaurant.name.toLowerCase().includes(searchKeyword) || 
+                                      !searchKeyword;
+                
+                // カテゴリフィルター
+                const matchesCategory = restaurant.category === selectedCategory || 
+                                       !selectedCategory;
+                
+                // 価格帯フィルター
+                const matchesPrice = restaurant.priceRange === selectedPrice || 
+                                    !selectedPrice;
+                
+                return matchesKeyword && matchesCategory && matchesPrice;
+            });
+            
+            displayRestaurants(filteredRestaurants);
+        }
+
+        // レストラン一覧を表示する関数
+        function displayRestaurants(restaurantsToDisplay) {
+            const restaurantList = document.getElementById('restaurant-list');
+            restaurantList.innerHTML = '';
+            
+            restaurantsToDisplay.forEach(restaurant => {
+                const card = document.createElement('div');
+                card.className = 'restaurant-card';
+                
+                const priceSymbol = restaurant.priceRange === 'low' ? '¥' : 
+                                   (restaurant.priceRange === 'medium' ? '¥¥' : '¥¥¥');
+                
+                const categoryText = {
+                    'japanese': '和食',
+                    'chinese': '中華',
+                    'italian': 'イタリアン',
+                    'cafe': 'カフェ'
+                };
+                
+                card.innerHTML = `
+                    <img src="${restaurant.image}" alt="${restaurant.name}" class="restaurant-image">
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">${restaurant.name}</div>
+                        <div class="restaurant-category">${categoryText[restaurant.category]} • ${priceSymbol}</div>
+                        <div>営業時間: ${restaurant.hours}</div>
+                        <div>電話: ${restaurant.phone}</div>
+                    </div>
+                `;
+                
+                restaurantList.appendChild(card);
+            });
+        }
+
+        // 初期表示
+        displayRestaurants(restaurants);
+    </script>
+</body>
+</html>
